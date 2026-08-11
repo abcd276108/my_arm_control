@@ -1,0 +1,29 @@
+Received signal: 11
+Stack trace (most recent call last) in thread 16827:
+#12   Object "[0xffffffffffffffff]", at 0xffffffffffffffff, in 
+#11   Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff96b95edb, in 
+#10   Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff96b2d5c7, in 
+#9    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff7f46bab3, in 
+#8    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff7f79f59b, in 
+#7    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff7f79d3d3, in 
+#6    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff7f79c887, in 
+#5    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff7f79d613, in 
+#4    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff7f79e70f, in 
+#3    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff7f71a12b, in 
+#2    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff96b47c58, in 
+#1    Object "linux-vdso.so.1", at 0xffffb31027bb, in 
+#0    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/liborbbec_camera.so", at 0xffff8ad7f433, in signalHandler(int)
+Received signal: 11
+Stack trace (most recent call last):
+#10   Object "[0xffffffffffffffff]", at 0xffffffffffffffff, in 
+#9    Object "/opt/ros/humble/lib/rclcpp_components/component_container", at 0xaaaab4a21daf, in 
+#8    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff96ad74cb, in __libc_start_main
+#7    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff96ad73fb, in 
+#6    Object "/opt/ros/humble/lib/rclcpp_components/component_container", at 0xaaaab4a21bbb, in 
+#5    Object "/opt/ros/humble/lib/librclcpp.so", at 0xffff96ff1587, in rclcpp::executors::SingleThreadedExecutor::spin()
+#4    Object "/opt/ros/humble/lib/librclcpp.so", at 0xffff96fe99db, in rclcpp::Executor::get_next_executable(rclcpp::AnyExecutable&, std::chrono::duration<long, std::ratio<1l, 1000000000l> >)
+#3    Object "/opt/ros/humble/lib/librclcpp.so", at 0xffff96fe69c3, in rclcpp::Executor::wait_for_work(std::chrono::duration<long, std::ratio<1l, 1000000000l> >)
+#2    Object "/opt/ros/humble/lib/librclcpp.so", at 0xffff96ff3e00, in 
+#1    Object "linux-vdso.so.1", at 0xffffb31027bb, in 
+#0    Object "/home/ubuntu/third_party_ros2/orbbec_ws/install/orbbec_camera/lib/liborbbec_camera.so", at 0xffff8ad7f433, in signalHandler(int)
+Received signal: 11
