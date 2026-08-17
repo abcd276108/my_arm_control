@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JetArm 工作板校正</title><link rel="stylesheet" href="/calibration.css"></head>
+<body><main>
+  <header><div><p class="eyebrow">WORKBOARD CALIBRATION</p><h1>工作板座標校正</h1><p>固定設備後只需設定一次；明天連上JetArm再補三個實機參考點。</p></div><a class="back" href="/runtime">返回操作台</a></header>
+  <div class="progress"><span class="active">1 工作板尺寸</span><span>2 點選四角</span><span>3 JetArm三點</span><span>4 儲存校正</span></div>
+  <section class="layout">
+    <div class="camera-panel">
+      <div class="panel-title"><div><p class="eyebrow">IMAGE PLANE</p><h2>依序點選工作板四角</h2></div><strong id="cornerProgress">0 / 4</strong></div>
+      <div class="canvas-wrap"><canvas id="boardCanvas" width="960" height="540"></canvas><div class="canvas-empty" id="canvasEmpty"><strong>尚未載入校正畫面</strong><small>選擇一張能完整看見工作板的照片</small></div></div>
+      <div class="corner-order"><span><b>1</b>左下</span><span><b>2</b>右下</span><span><b>3</b>右上</span><span><b>4</b>左上</span></div>
+      <div class="actions"><button class="primary" id="captureLive" type="button">擷取即時相機畫面</button><label class="file-button">選擇本機照片<input id="imageInput" type="file" accept="image/*"></label><button id="undoCorner" type="button">復原上一點</button><button id="resetCorners" type="button">重新標記</button></div>
+      <p class="hint">這不是YOLO資料標註，不需要重新訓練。相機、工作板或手臂底座移動後才需要重做。</p>
+    </div>
+    <form class="settings" id="calibrationForm">
+      <section class="card"><p class="eyebrow">BOARD</p><h2>工作板資料</h2><label>設定名稱<input id="boardName" value="competition_workboard"></label><div class="two"><label>寬度（mm）<input id="boardWidth" type="number" min="1" step="0.1" required></label><label>長度（mm）<input id="boardHeight" type="number" min="1" step="0.1" required></label></div></section>
+      <section class="card"><p class="eyebrow">ROBOT PLANE</p><h2>JetArm三個參考點</h2><p class="description">明天將真正焊槍尖端依序對準工作板三角，填入JetArm回報的XYZ。現在可以留白並先儲存畫面校正。</p>
+        <div class="robot-grid"><b>位置</b><b>X</b><b>Y</b><b>Z</b>
+          <span>左下</span><input data-ref="left_bottom" data-axis="x" type="number" step="0.001"><input data-ref="left_bottom" data-axis="y" type="number" step="0.001"><input data-ref="left_bottom" data-axis="z" type="number" step="0.001">
+          <span>右下</span><input data-ref="right_bottom" data-axis="x" type="number" step="0.001"><input data-ref="right_bottom" data-axis="y" type="number" step="0.001"><input data-ref="right_bottom" data-axis="z" type="number" step="0.001">
+          <span>左上</span><input data-ref="left_top" data-axis="x" type="number" step="0.001"><input data-ref="left_top" data-axis="y" type="number" step="0.001"><input data-ref="left_top" data-axis="z" type="number" step="0.001">
+        </div>
+      </section>
+      <section class="card"><p class="eyebrow">SAFETY HEIGHT</p><h2>工作板與空跑高度</h2><label>工作板表面Z（JetArm mm，可明日填）<input id="surfaceHeight" type="number" step="0.001" placeholder="桌面水平時可取代三個參考點的Z"></label><div class="two"><label>DOWN表面上方（mm）<input id="downHeight" type="number" value="30" min="0" step="1"></label><label>UP表面上方（mm）<input id="upHeight" type="number" value="80" min="1" step="1"></label></div><p class="warning">第一次只做未焊接空跑；確認方向和比例後才能逐步降低DOWN。</p></section>
+      <section class="card"><p class="eyebrow">AUTO PROCESS</p><h2>自動判斷點焊／線焊</h2><div class="two"><label>線焊最小位移（mm）<input id="lineThreshold" type="number" value="15" min="1" step="1"></label><label>點焊最大散布（mm）<input id="pointThreshold" type="number" value="8" min="1" step="1"></label></div><p class="description">連續DOWN位置維持在小範圍內判定為點焊；位移超過門檻自動判定為線焊。</p></section>
+      <div class="save-row"><div><strong id="saveStatus">尚未儲存</strong><small id="saveDetail">先輸入尺寸並標記四角</small></div><button class="primary" id="saveCalibration" type="submit">儲存校正設定</button></div>
+    </form>
+  </section>
+</main><script src="/calibration.js"></script></body></html>

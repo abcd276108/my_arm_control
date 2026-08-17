@@ -1,0 +1,12 @@
+__pycache__/
+output/
+*.pyc
+*_result.jpg
+board_rectified.jpg
+grid_result.jpg
+vlm_detection_result.jpg
+step3_pin_matching_result.jpg
+welding_plan.json
+robot_trajectory.json
+final_aoi_report.json
+solder_inspection_step_*.jpg

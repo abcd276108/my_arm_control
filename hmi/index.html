@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>智慧學習焊接手臂</title><link rel="stylesheet" href="/styles.css">
+</head>
+<body><main>
+  <header><div><p class="eyebrow">JETARM WELDING TEACHING SYSTEM</p><h1>智慧學習焊接手臂</h1><p class="subtitle">視覺示教、模擬驗證、確認後執行。</p></div><div class="status" id="systemStatus"><span></span> 本機服務已連線</div></header>
+  <nav class="workflow" aria-label="操作進度">
+    <button class="active" data-step="1"><b>01</b><span>選擇模式</span></button><button data-step="2"><b>02</b><span>建立軌跡</span></button><button data-step="3"><b>03</b><span>軌跡預覽</span></button><button data-step="4"><b>04</b><span>模擬驗證</span></button><button data-step="5"><b>05</b><span>人員確認</span></button><button data-step="6"><b>06</b><span>實機執行</span></button>
+  </nav>
+  <section class="screen active" data-screen="1">
+    <div class="section-heading"><p class="eyebrow">STEP 01</p><h2>這次要進行什麼任務？</h2><p>初賽採固定相機與固定工作板位置，每次只處理一個工件。</p></div>
+    <div class="mode-grid">
+      <button class="mode-card" data-mode="teaching"><span class="mode-number">A</span><strong>視覺示教</strong><small>同步記錄 RGB、Depth、焊槍狀態與尖端軌跡</small><em>初賽主要流程</em></button>
+      <button class="mode-card" data-mode="saved"><span class="mode-number">B</span><strong>已儲存任務</strong><small>換上相同位置的新工件，載入先前通過的軌跡</small><em>歷史軌跡重現</em></button>
+      <button class="mode-card disabled" disabled><span class="mode-number">C</span><strong>自動規劃焊接</strong><small>點焊、線段焊接與多工位批次規劃</small><em>初賽後擴充</em></button>
+    </div>
+    <aside class="scope-note"><strong>目前操作條件</strong><span>相機、工作板與手臂基座固定；更換工件時須放回同一定位位置。</span></aside>
+  </section>
+  <section class="screen" data-screen="2">
+    <div class="section-heading"><p class="eyebrow">STEP 02</p><h2 id="buildTitle">建立視覺示教軌跡</h2></div>
+    <div class="workspace">
+      <div class="panel primary" id="teachingPanel"><div class="record-state"><span></span><div><strong>示教資料來源</strong><small>目前以已錄製的 RGB 與 Depth Task 進行開發測試</small></div></div><label for="task">測試資料</label><select id="task"></select><label for="model">辨識模型</label><select id="model"></select><button class="primary-button" id="fusion">結束示教並建立軌跡</button><p class="hint">正式整合後，此按鈕會改為「開始示教／結束示教」，並直接讀取 JetArm 相機。</p></div>
+      <div class="panel" id="savedPanel" hidden><h3>選擇標準任務</h3><div id="savedList" class="saved-list"></div><p class="hint">請將新工件放回與示教時相同的左下角定位位置。</p></div>
+      <div class="panel checklist"><h3>建立條件</h3><p>✓ 單一工作板</p><p>✓ 固定拍攝角度</p><p>✓ 固定工件定位</p><p>○ 工作板自動校正（初賽後）</p></div>
+    </div>
+  </section>
+  <section class="screen" data-screen="3">
+    <div class="section-heading"><p class="eyebrow">STEP 03</p><h2>軌跡預覽</h2><p id="summarySentence">完成示教後，系統會在此顯示軌跡摘要。</p></div>
+    <div class="metric-grid"><article><span>總樣本</span><strong id="total">—</strong></article><article><span>有效軌跡點</span><strong id="valid">—</strong></article><article><span>有效率</span><strong id="rate">—</strong></article><article><span>模擬點數</span><strong id="waypointCount">—</strong></article></div>
+    <div class="panel result"><div><p class="eyebrow">SYSTEM SUMMARY</p><h3 id="resultTitle">等待建立軌跡</h3><p id="resultText">系統將使用深度與影像座標產生平滑三維路徑。</p></div><div class="frame" id="frame">座標系：尚未產生</div></div>
+    <div class="actions"><button class="secondary-button" data-back="2">返回調整</button><button class="primary-button" data-next="4" disabled id="previewNext">進行模擬驗證</button></div>
+  </section>
+  <section class="screen" data-screen="4">
+    <div class="section-heading"><p class="eyebrow">STEP 04</p><h2>模擬驗證</h2><p>初賽版先顯示軌跡檢查；Gazebo 連線完成後在此播放手臂模擬。</p></div>
+    <div class="simulation-placeholder"><div class="robot-mark">J</div><strong>Gazebo 模擬畫面</strong><span>等待隊友提供 ROS 2 軌跡接收介面</span><small id="handoffPath">建立軌跡後會自動產生模擬交接包</small></div>
+    <div class="validation-grid"><p><span>運動規劃</span><b>軌跡已產生</b></p><p><span>軌跡品質</span><b>已完成濾波</b></p><p><span>位置條件</span><b>固定治具模式</b></p><p><span>模擬連線</span><b class="waiting">待整合</b></p></div>
+    <div class="actions"><button class="secondary-button" data-back="3">返回預覽</button><button class="primary-button" data-next="5">查看確認摘要</button></div>
+  </section>
+  <section class="screen" data-screen="5">
+    <div class="section-heading"><p class="eyebrow">STEP 05</p><h2>人員確認</h2><p>請確認工件已放回定位位置，且手臂周圍無人員及障礙物。</p></div>
+    <div class="confirm-layout"><div class="panel"><h3>任務摘要</h3><dl class="summary-list"><div><dt>任務模式</dt><dd id="confirmMode">視覺示教</dd></div><div><dt>工作方式</dt><dd>固定位置、單一工件</dd></div><div><dt>軌跡狀態</dt><dd>已建立</dd></div><div><dt>執行權限</dt><dd>等待人員確認</dd></div></dl></div><div class="panel save-option"><label class="toggle"><input type="checkbox" id="saveAfter"><span></span><b>執行成功後儲存至任務庫</b></label><label for="taskName">任務名稱</label><input id="taskName" value="視覺示教任務" maxlength="40"><p>即使不勾選，本次結果仍保留在最近示教，之後可以找回。</p></div></div>
+    <details class="panel technical"><summary>查看技術檢查資訊</summary><p>軌跡已濾波；目前採固定工作板位置。IK、碰撞與座標標定將於 Gazebo／真機橋接完成後啟用。</p></details>
+    <div class="actions"><button class="secondary-button" data-back="3">返回調整</button><button class="primary-button" id="confirmExecute">確認並進入執行</button></div>
+  </section>
+  <section class="screen" data-screen="6">
+    <div class="section-heading"><p class="eyebrow">STEP 06</p><h2>實機執行</h2></div><div class="execution-lock"><span>安全鎖定</span><h3>真機控制尚未連線</h3><p>目前可完成介面、推論、XYZ 與軌跡輸出；完成相機到手臂座標轉換及 Gazebo 驗證前，不會傳送手臂動作。</p></div><div class="actions"><button class="secondary-button" data-back="5">返回確認</button><button class="danger-button" disabled>中止動作</button><button class="primary-button" disabled>開始實機執行</button></div><button class="text-button" id="finishDemo">完成本次展示並返回首頁</button>
+  </section>
+</main><script src="/app.js"></script></body></html>

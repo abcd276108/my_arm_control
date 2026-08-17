@@ -1,0 +1,9 @@
+{
+  "native_image_size": [640, 480],
+  "board_corners_px": [[154, 148], [498, 148], [497, 350], [154, 351]],
+  "rectified_size": [344, 203],
+  "grid_shape": [14, 24],
+  "grid_margins_px": [10.0, 9.0],
+  "inference_min_match_ratio": 0.85,
+  "note": "These corner coordinates are only a starting profile from the supplied 640x480 image. Re-measure board_corners_px after fixing the robot camera mount."
+}

@@ -1,0 +1,11 @@
+.header-actions{display:flex;align-items:center;gap:12px}
+.back-button{padding:10px 14px;border:1px solid #aeb1b2;background:#fff;color:#4f5355;border-radius:4px;font-weight:700;cursor:pointer}
+.back-button:hover{border-color:var(--brick);color:var(--brick)}
+.steps button.visited{color:#fff}
+.history-layout .empty-stage{align-content:center;gap:10px;min-height:300px}
+.runtime-task-list{display:grid;grid-template-columns:repeat(2,minmax(240px,1fr));gap:12px}
+.runtime-task{padding:18px;border:1px solid var(--line);background:#fff;text-align:left;cursor:pointer}
+.runtime-task:hover{border-color:var(--brick)}
+.runtime-task strong,.runtime-task small{display:block}
+.runtime-task small{margin-top:7px;color:var(--gray)}
+@media(max-width:900px){.header-actions{align-items:flex-end}.runtime-task-list{grid-template-columns:1fr}}
